@@ -1,12 +1,13 @@
-import React from 'react';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Header from './components/Header';
-import Home from './components/Home';
-import Movie from './components/Movie';
-import NotFound from './components/NotFound';
-import Login from './components/Login';
-import UserProvider from './context';
-import {GlobalStyle} from './GlobalStyle';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Home from "./components/Home";
+import Movie from "./components/Movie";
+import NotFound from "./components/NotFound";
+import Login from "./components/Login";
+import UserProvider from "./context";
+import { GlobalStyle } from "./GlobalStyle";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => (
   <Router>

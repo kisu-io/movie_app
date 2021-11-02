@@ -6,12 +6,12 @@ import {
   REQUEST_TOKEN_URL,
   LOGIN_URL,
   SESSION_ID_URL,
-} from './config.js';
+} from "./config.js";
 
 const defaultConfig = {
-  method: 'POST',
+  method: "POST",
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 };
 
@@ -29,6 +29,10 @@ const apiSettings = {
   fetchCredits: async (movieId) => {
     const creditsEndpoint = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`;
     return await (await fetch(creditsEndpoint)).json();
+  },
+  fetchTrailer: async (movieId) => {
+    const trailerEndpoint = `${API_URL}movie/${movieId}/videos?api_key=${API_KEY}`;
+    return await (await fetch(trailerEndpoint)).json();
   },
   // Bonus material below for login
   getRequestToken: async () => {
@@ -53,7 +57,7 @@ const apiSettings = {
       const sessionId = await (
         await fetch(SESSION_ID_URL, {
           ...defaultConfig,
-          body: JSON.stringify({request_token: requestToken}),
+          body: JSON.stringify({ request_token: requestToken }),
         })
       ).json();
       return sessionId;
@@ -65,7 +69,7 @@ const apiSettings = {
     const rating = await (
       await fetch(endpoint, {
         ...defaultConfig,
-        body: JSON.stringify({value}),
+        body: JSON.stringify({ value }),
       })
     ).json();
 

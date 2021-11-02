@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Wrapper, Content, Text} from './HeroImage.style';
+import React from "react";
+import PropTypes from "prop-types";
+import { Wrapper, Content, Text } from "./HeroImage.style";
 
-const HeroImage = ({image, title, text}) => (
+const HeroImage = ({ image, title, text }) => (
   <Wrapper image={image}>
     <Content>
       <Text>

@@ -1,7 +1,7 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from "react";
 
-import API from '../API';
-import {isPersistedState} from '../helpers';
+import API from "../API";
+import { isPersistedState } from "../helpers";
 export const useMovieFetch = (movieId) => {
   const [state, setState] = useState({});
   const [loading, setLoading] = useState(true);
@@ -15,12 +15,17 @@ export const useMovieFetch = (movieId) => {
 
         const movie = await API.fetchMovie(movieId);
         const credits = await API.fetchCredits(movieId);
-        const directors = credits.crew.filter((member) => member.job === 'Director');
+        const trailer = await API.fetchTrailer(movieId);
+        console.log(trailer);
+        const directors = credits.crew.filter(
+          (member) => member.job === "Director"
+        );
 
         setState({
           ...movie,
           actors: credits.cast,
           directors,
+          trailer: trailer.results,
         });
 
         setLoading(false);
@@ -44,5 +49,5 @@ export const useMovieFetch = (movieId) => {
     sessionStorage.setItem(movieId, JSON.stringify(state));
   }, [movieId, state]);
 
-  return {state, loading, error};
+  return { state, loading, error };
 };

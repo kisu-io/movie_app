@@ -1,41 +1,50 @@
-import React from 'react';
+import React from "react";
 // import
 
 // Config
-import {POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL} from '../config';
+// eslint-disable-next-line no-unused-vars
+import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from "../config";
 // Components
-import HeroImage from './HeroImage';
-import Grid from './Grid';
-import Thumb from './Thumb';
-import Spinner from './Spinner';
-import SearchBar from './SearchBar';
-import Button from './Button';
+import HeroCarousel from "./HeroCarousel";
+// import HeroImage from "./HeroImage";
+import Grid from "./Grid";
+import Thumb from "./Thumb";
+import Spinner from "./Spinner";
+import SearchBar from "./SearchBar";
+import Button from "./Button";
 // Hooks
-import {useHomeFetch} from '../Hooks/useHomeFetch';
+import { useHomeFetch } from "../Hooks/useHomeFetch";
 // Image
-import NoImage from '../images/no_image.jpg';
+import NoImage from "../images/no_image.jpg";
 
 const Home = () => {
-  const {state, loading, error, setSearchTerm, searchTerm, setIsLoadingMore} = useHomeFetch();
+  const { state, loading, error, setSearchTerm, searchTerm, setIsLoadingMore } =
+    useHomeFetch();
 
   if (error) return <div>Something is wrong...</div>;
 
   return (
     <>
       {!searchTerm && state.results[0] ? (
-        <HeroImage
-          image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state.results[0].backdrop_path}`}
-          title={state.results[0].original_title}
-          text={state.results[0].overview}
-        />
-      ) : null}
+        <HeroCarousel data={state.results} />
+      ) : // <HeroImage
+      //   data={state.results}
+      //   image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state.results[0].backdrop_path}`}
+      //   title={state.results[0].original_title}
+      //   text={state.results[0].overview}
+      // />
+      null}
       <SearchBar setSearchTerm={setSearchTerm} />
-      <Grid header={searchTerm ? 'Search Result' : 'Popular Movies'}>
+      <Grid header={searchTerm ? "Search Result" : "Popular Movies"}>
         {state.results.map((movie) => (
           <Thumb
             key={movie.id}
             clickable
-            image={movie.poster_path ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path : NoImage}
+            image={
+              movie.poster_path
+                ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
+                : NoImage
+            }
             movieId={movie.id}
           />
         ))}
